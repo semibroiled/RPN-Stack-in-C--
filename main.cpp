@@ -8,7 +8,6 @@ bool isOperator(char op) {
 }
 
 int main() {
-    RPNStackCalculator calculator;
 
     std::string expression;
     std::cout << "Welcome to the RPN Stack Calculator Project!";
@@ -16,36 +15,66 @@ int main() {
     std::cout << "This is an example implementation of a Calculator with Postfix Notation aka RPN implemented with a Stack in C++";
     std::cout << std::endl;
 
-    std::cout << "Enter a valid postfix expression. Type exit to to quit. Type help to get additonal instructions";
-    std::cout << std::endl;
-    std::cout << ">>";
+    bool run = true;
+    while(run) {
+        RPNStackCalculator calculator;
+        
+        std::cout << "Enter a valid postfix expression. Type exit to to quit. Type help to get additonal instructions";
+        std::cout << std::endl;
+        std::cout << ">>";
 
-    std::getline(std::cin, expression);
+        std::getline(std::cin, expression);
 
-    std::istringstream iss(expression);
-    std::string token;
-
-    while (iss>>token) {
-        if(isdigit(token[0])) {
-            double operand = std::stoi(token);
-            calculator.pushOperand(operand);
-        } else if (isOperator(token[0])) {
-            // If the token is an Operator, pop top 2 operands to compute 
-            char curOperator = token[0];
-            calculator.compute(curOperator);
-        } else {
-            std::cout << "Invalid Token: " << token << std::endl;
-            std::cout << "If the token is an Operator supported by class, add to isOperator functoin in main.cpp";
-            std::cout << std::endl;
+        if ((expression == "e") || (expression == "exit") || (expression == "Exit"))  {
+            run = false;
+            continue;
         }
-    };
 
-    try {
-        double result = calculator.fetchResult();
-        std::cout << "Result: " << result << std::endl;
-    } catch (const std::exception& ex) {
-        std::cerr << "Error: " << ex.what() << std::endl;
+        if ((expression == "h") || (expression == "help") || (expression == "Help")) {
+            std::cout << "Type in Mathematical Expressions with...";
+            std::cout << std::endl;
 
+            std::cout << "+ for Addition, - for Subtraction, / for Division, * for Multplication and ^ for Exponent";
+            std::cout << std::endl;
+
+            std::cout << "Expressions have to be in RPN or Postfix Notation, ie...";
+            std::cout << std::endl;
+
+            std::cout << "You would write an inline expression 5+3 in RPN Notation as 5 3 +";
+            std::cout << std::endl;
+
+            std::cout << "Note that the expression tokens have to be separated by a space";
+            std::cout << std::endl;
+            std::cout << std::endl;
+
+            continue;
+        }
+
+        std::istringstream iss(expression);
+        std::string token;
+
+        while (iss>>token) {
+            if(isdigit(token[0])) {
+                double operand = std::stoi(token);
+                calculator.pushOperand(operand);
+            } else if (isOperator(token[0])) {
+                // If the token is an Operator, pop top 2 operands to compute 
+                char curOperator = token[0];
+                calculator.compute(curOperator);
+            } else {
+                std::cout << "Invalid Token: " << token << std::endl;
+                std::cout << "If the token is an Operator supported by class, add to isOperator functoin in main.cpp";
+                std::cout << std::endl;
+            }
+        };
+
+        try {
+            double result = calculator.fetchResult();
+            std::cout << "Result: " << result << std::endl;
+        } catch (const std::exception& ex) {
+            std::cerr << "Error: " << ex.what() << std::endl;
+
+        };
     };
 
     return 0;
