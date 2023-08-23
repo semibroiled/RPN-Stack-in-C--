@@ -6,15 +6,15 @@ RPN (Reverse Polish Notation) or Postfix Notation, is a form of notation
 in which we write mathematical expressions beginning with the operands or numbers
 of the expression, ending with their operators.
 
-For example, we would write 2+2, which is in inline notation, as 2 2 +, in 
+For example, we would write `2+2`, which is in inline notation, as `2 2 +`, in 
 Postfix Notation.
 
 For more complex expressions, we don't use parentheses to denote order of operations
 as in with normal inline notation. To compute postfix expressions, we follow along
 a specific algorithms using a stack.
 
-## Computing RPN Expressions
-### Stacks
+## 1. Computing RPN Expressions
+### 1.1. Stacks
 
 A stack is a type of ordered collection, where values are put in a piling order,
 ie, following FILO principle. Imagine a pile of books on a desk. The first book at the
@@ -30,7 +30,7 @@ You can push, ie insert values onto the top level succesively.
 
 In C++, you can call a stack Data Type from the Standard Library.
 
-### RPN in Stack
+### 1.2. RPN in Stack
 
 Take the case of an RPN expressoin, 1 2 3 + -
 
@@ -54,9 +54,9 @@ operator. We get the top two values in the stack, being 5 and 1 repectively.
 At the end of postfix notation, there are no more operators left, and we have
 one value, the result, left on stack.
 
-## Using the program
+## 2. Using the program
 
-### Compiling and Running the Program
+### 2.1. Compiling and Running the Program
 
 The code is separated into three files. The script running the calculator is in the main file.
 With a C++ compiler, such as GCC or Clang, compile the individual files in the same path
@@ -96,9 +96,12 @@ Note that the expression tokens have to be separated by a space
 
 Acceptable responses are space separate and postfix. 
 
-_Examples are:_ 5 4 +, 5 9 1 + *, ...
+_Examples are:_ 
+- 5 4 +, 
+- 5 9 1 + *,
+- ...
 
-### Design Decisions
+### 2.2. Design Decisions
 
 The program is built with three files:
 
