@@ -1,3 +1,57 @@
+#include "rpn_calculator.h"
+#include <iostream>
+#include <sstream>
+
+bool isOperator(char op) {
+    // Check for supported operations in Calculator Class
+    return op=='+' || op== '-' || op =='*' || op == '/' || op =='^';
+}
+
+int main() {
+    RPNStackCalculator calculator;
+
+    std::string expression;
+    std::cout << "Welcome to the RPN Stack Calculator Project!";
+    std::cout << std::endl;
+    std::cout << "This is an example implementation of a Calculator with Postfix Notation aka RPN implemented with a Stack in C++";
+    std::cout << std::endl;
+
+    std::cout << "Enter a valid postfix expression. Type exit to to quit. Type help to get additonal instructions";
+    std::cout << std::endl;
+    std::cout << ">>";
+
+    std::getline(std::cin, expression);
+
+    std::istringstream iss(expression);
+    std::string token;
+
+    while (iss>>token) {
+        if(isdigit(token[0])) {
+            double operand = std::stoi(token);
+            calculator.pushOperand(operand);
+        } else if (isOperator(token[0])) {
+            // If the token is an Operator, pop top 2 operands to compute 
+            char curOperator = token[0];
+            calculator.compute(curOperator);
+        } else {
+            std::cout << "Invalid Token: " << token << std::endl;
+            std::cout << "If the token is an Operator supported by class, add to isOperator functoin in main.cpp";
+            std::cout << std::endl;
+        }
+    };
+
+    try {
+        double result = calculator.fetchResult();
+        std::cout << "Result: " << result << std::endl;
+    } catch (const std::exception& ex) {
+        std::cerr << "Error: " << ex.what() << std::endl;
+
+    };
+
+    return 0;
+}
+
+/*
 #include <iostream>
 #include <stack>
 #include <sstream> //Parse string to numbers
@@ -78,3 +132,4 @@ int main(){
 
     return 0;
 };
+*/
