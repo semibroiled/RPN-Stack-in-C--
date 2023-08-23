@@ -63,18 +63,18 @@ With a C++ compiler, such as GCC or Clang, compile the individual files in the s
 in terminal.
 
 Explained step by step,
-1- Go to the path with the files in terminal
-2- Compile files into object files
-3- Run `g++ -c rpn_caculator.cpp`
-4- Run `g++ -c main.cpp`
+1) Go to the path with the files in terminal
+2) Compile files into object files
+3) Run `g++ -c rpn_caculator.cpp`
+4) Run `g++ -c main.cpp`
 
 This generates a main.o and rpn_calculator.o file in your directory
 
-6- Link the two files into an executable with `g++ -o calc main.o rpn_calculator.o`
+6) Link the two files into an executable with `g++ -o calc main.o rpn_calculator.o`
 
 This makes a binary executable calc in your path
 
-7- Run the executable with `./calc` and follow through the instructions
+7) Run the executable with `./calc` and follow through the instructions
 
 At any time, type exit to quit the program from the terminal, help for
 further instructions on how to operate the program. Here's an excerpt 
@@ -85,7 +85,6 @@ steps 1 through 6 are done for you. And you would only need to do the 7th step
 to hop into the executable.
 
 ```
-
 Enter a valid postfix expression. Type exit to to quit. Type help to get additonal instructions
 >>help
 Type in Mathematical Expressions with...
@@ -93,12 +92,11 @@ Type in Mathematical Expressions with...
 Expressions have to be in RPN or Postfix Notation, ie...
 You would write an inline expression 5+3 in RPN Notation as 5 3 +
 Note that the expression tokens have to be separated by a space
-
 ```
 
 Acceptable responses are space separate and postfix. 
 
-Examples are: 5 4 +, 5 9 1 + *, ...
+_Examples are:_ 5 4 +, 5 9 1 + *, ...
 
 ### Design Decisions
 
