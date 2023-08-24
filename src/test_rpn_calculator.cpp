@@ -16,7 +16,6 @@
 
 void runTests()
 {
-
     // Store test cases in string array
     std::string expressions[] = {
         "5 3 +",     // * 5+3=8

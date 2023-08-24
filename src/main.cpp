@@ -15,7 +15,6 @@
 
 int main()
 {
-
     // Introducing the Program
     std::cout << "Welcome to the RPN Stack Calculator Project!";
     std::cout << std::endl;
