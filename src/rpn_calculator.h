@@ -1,21 +1,20 @@
 /**
- * This header file contains the RPNStackCalculator Class 
- * 
+ * This header file contains the RPNStackCalculator Class
+ *
  * RPNStackCalculator lets you declare an RPNStackCalculator object,
  * initializing with a private stack container of doubles.
- * 
+ *
  * This declares 3 public methods
  *     pushOperand, compute and fetchResult
- * 
+ *
  * This header file is called in
- *      rpn_calculator.cpp, 
+ *      rpn_calculator.cpp,
  *          where the functions are defined
- *      main.cpp, 
+ *      main.cpp,
  *          where it is instanced to run the program
- *      test_rpn_calculator.cpp, 
- *          where an instance of it is used to test operations   
-*/
-
+ *      test_rpn_calculator.cpp,
+ *          where an instance of it is used to test operations
+ */
 
 #ifndef RPN_CALCULATOR_H
 #define RPN_CALCULATOR_H
