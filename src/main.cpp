@@ -28,6 +28,12 @@ int main()
     // Boolean Switch to run the calculator in loop
     bool run = true;
 
+    // TODO: Add functionality to parse infix to postfix
+    // * Mode of Operation: Infix or postfix/rpn
+    // * RPN by default
+    // Define a working mode: in RPN or Inline
+    std::string mode = "RPN";
+
     // Calculator runs in this loop, adds basic CLI functionality
     while (run)
     {
@@ -35,9 +41,11 @@ int main()
         RPNStackCalculator calculator;
 
         // Prompt for user input
-        std::cout << "Enter a valid postfix expression. "
-                     "Type exit or e to to quit. "
-                     "Type help or h to get additonal instructions";
+        std::cout << "Enter a valid expression. "
+                  << "Current Mode: " << mode << std::endl;
+
+        std::cout << "Type exit or e to to quit. "
+                     "Type help or h to get additonal instructions.";
         std::cout << std::endl;
         std::cout << ">>";
 
@@ -58,6 +66,27 @@ int main()
             continue;
         }
 
+        // Guard Clause for mode changes
+        // * RPN/Postfix Mode Change
+        if ((expression=="post")||(expression=="rpn")||(expression=="RPN")||(expression=="postfix")){
+            mode = "RPN";
+            continue;
+        }
+        // * Inline Mode Change
+        if ((expression=="inline")||(expression=="in")){
+            mode = "Inline";
+            continue;
+        }
+
+        // TODO:  to parse infix to postfix.
+        // ! Band Aid fix -> streamline to switch cases for better use
+        // TODO: should return expression as postfix if in inline mode
+        if ((mode == "inline") || (mode == "in") || (mode != "RPN") || (mode != "rpn") || (mode != "postfix") || (mode != "post"))
+        {
+            // Parse, Change expression to postfix
+        }
+
+        // * This section is based off of RPN/ Postfix Notation
         // Run expression through instance of iss
         std::istringstream iss(expression);
 
