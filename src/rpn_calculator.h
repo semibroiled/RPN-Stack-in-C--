@@ -15,7 +15,7 @@ public:
     double fetchResult();
 
 private:
-    std::stack<int> operandStack;
+    std::stack<double> operandStack;
 };
 
 #endif

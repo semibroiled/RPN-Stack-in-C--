@@ -1,11 +1,14 @@
-#include "rpn_calculator.h"
 #include <iostream>
 #include <sstream>
+#include "rpn_calculator.h"
+#include "isOperator.h"
+#include "helpSheet.h"
 
+/*
 bool isOperator(char op) {
     // Check for supported operations in Calculator Class
     return op=='+' || op== '-' || op =='*' || op == '/' || op =='^';
-}
+}*/
 
 int main() {
 
@@ -31,6 +34,9 @@ int main() {
         }
 
         if ((expression == "h") || (expression == "help") || (expression == "Help")) {
+            
+            helpSheet();
+            /*
             std::cout << "Type in Mathematical Expressions with...";
             std::cout << std::endl;
 
@@ -45,7 +51,7 @@ int main() {
 
             std::cout << "Note that the expression tokens have to be separated by a space";
             std::cout << std::endl;
-            std::cout << std::endl;
+            std::cout << std::endl; */ // ! Replace with a call function
 
             continue;
         }

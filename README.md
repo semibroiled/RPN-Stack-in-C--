@@ -56,33 +56,33 @@ one value, the result, left on stack.
 
 ## 2. Using the program
 
-### 2.1. Compiling and Running the Program
+### 2.1. Compiling and Running the Program in Terminal with GCC
 
-The code is separated into three files. The script running the calculator is in the main file.
-With a C++ compiler, such as GCC or Clang, compile the individual files in the same path
-in terminal.
+#### 2.1.1. Compiling RPN Calculator in Command Line to build/bin/
+
+The code is separated into 5 files. The script running the calculator is in the main.cpp file.
+With a C++ compiler, such as GCC or Clang, compile the individual files *.cpp in the path `./src/`
+in terminal. For this, I assume to be using a GCC compiler already in PATH on a Mac Computer.
 
 Explained step by step,
-1) Go to the path with the files in terminal
+1) Go to the path with the files in terminal in root directory `RPN Stack in C++`
 2) Compile files into object files
-3) Run `g++ -c rpn_caculator.cpp`
-4) Run `g++ -c main.cpp`
+2a)) Run `g++ -c src/rpn_caculator.cpp`, assuming you're in the root `.` directory
+2b)) Run `g++ -c src/main.cpp`
 
-This generates a main.o and rpn_calculator.o file in your directory
+This generates a `main.o` and `rpn_calculator.o` file in your root directory
 
-6) Link the two files into an executable with `g++ -o calc main.o rpn_calculator.o`
+3) Link the two files into an executable in the build/bin/ directory; `g++ -o build/bin/calc main.o rpn_calculator.o`
 
-This makes a binary executable calc in your path
+This makes a binary executable named calc in the specified path. This name can be anything.
 
-7) Run the executable with `./calc` and follow through the instructions
+4) Run the executable with `build/bin/calc` and follow through the instructions in program
 
-At any time, type exit to quit the program from the terminal, help for
-further instructions on how to operate the program. Here's an excerpt 
-from the help files on running the program
+At any time, 
+- type exit to quit the program from the terminal, 
+- help for further instructions on how to operate the program. 
 
-Normally, I would have already compiled the calc binary exectuable. So, 
-steps 1 through 6 are done for you. And you would only need to do the 7th step
-to hop into the executable.
+Here's an excerpt from the help files on running the program.
 
 ```
 Enter a valid postfix expression. Type exit to to quit. Type help to get additonal instructions
@@ -94,12 +94,50 @@ You would write an inline expression 5+3 in RPN Notation as 5 3 +
 Note that the expression tokens have to be separated by a space
 ```
 
-Acceptable responses are space separate and postfix. 
+Acceptable responses are space separated and of postfix notation. 
 
 _Examples are:_ 
 - 5 4 +, 
 - 5 9 1 + *,
 - ...
+
+Normally, I would have already compiled the calc binary exectuable. So, 
+steps 1 through 4 are done for you. And you would only need to do the 4th step
+to hop into the executable.
+
+### 2.2. Compiling the program with Cmake and Make
+
+Again, I am assuming this to be done on a Darwin Max. I expect it to be slightly modified on a Windows computer. Linux/Ubuntu should be the same.
+
+
+
+#### 2.1.2. Compiling and Running Tests
+
+The `src` directory also has a test file with which we can validate the efficacy of the program in the `RPNStackCalculator` Class. Here's how you can compile and run it yourself to test it.
+
+In the `src/test_rpn_calculatpr.cpp` file, insert in your own expressions and values to test in `expressions` and `expectResults` array, defined in Line 9 and 19 respectively. By default, you can also work with the values there.
+
+The steps are similar to compiling and linking the `main.cpp` file. 
+
+Explained step by step,
+1) Go to the path with the files in terminal in root directory `RPN Stack in C++`
+2) Compile files into object files
+2a)) Run `g++ -c src/rpn_caculator.cpp`, assuming you're in the root `.` directory.
+This may already be done from 2.1.1.
+2b)) Run `g++ -std=c++17 -c src/test_rpn_calculator.cpp`. This change with the `-std` is important, because at least in my computer, the `std::size` in Line 21 wouldn't compile otherwise.
+
+This generates a `test_rpn_calculator.o` and `rpn_calculator.o` file in your root directory
+
+3) Link the two files into an executable in the build/bin/ directory; `g++ -o build/bin/test_calc test_rpn_calculator.o rpn_calculator.o`
+
+This makes a binary executable named test_calc in the specified path. This name can be anything of your choice.
+
+4) Run the executable with `build/bin/test_calc` and the assertion results print to terminal. In case of errors, you would see something going wrong. 
+
+Normally, I would have already compiled the test_calc binary exectuable. So, 
+steps 1 through 4 are done for you. And you would only need to do the 4th step
+to hop into the executable.
+
 
 ### 2.2. Design Decisions
 
