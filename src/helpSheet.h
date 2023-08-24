@@ -2,7 +2,6 @@
 #define HELP_SHEET
 
 void helpSheet () {
-    std::cout<<std::endl;
     std::cout << "Some Instructions to help you along the tool"<<std::endl;
 
     std::cout << "Type in Mathematical Expressions using:";
@@ -11,7 +10,7 @@ void helpSheet () {
     std::cout   << "-> '+' for Addition," << std::endl 
                 << "-> '-' for Subtraction," << std::endl 
                 <<  "-> '/' for Division," << std::endl 
-                <<  "-> '*' for Multplication and" << std::endl 
+                <<  "-> '*' for Multplication," << std::endl 
                 << "-> '^' for Exponent";
 
     std::cout << std::endl;

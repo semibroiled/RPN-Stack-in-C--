@@ -105,12 +105,6 @@ Normally, I would have already compiled the calc binary exectuable. So,
 steps 1 through 4 are done for you. And you would only need to do the 4th step
 to hop into the executable.
 
-### 2.2. Compiling the program with Cmake and Make
-
-Again, I am assuming this to be done on a Darwin Max. I expect it to be slightly modified on a Windows computer. Linux/Ubuntu should be the same.
-
-
-
 #### 2.1.2. Compiling and Running Tests
 
 The `src` directory also has a test file with which we can validate the efficacy of the program in the `RPNStackCalculator` Class. Here's how you can compile and run it yourself to test it.
@@ -138,40 +132,59 @@ Normally, I would have already compiled the test_calc binary exectuable. So,
 steps 1 through 4 are done for you. And you would only need to do the 4th step
 to hop into the executable.
 
+### 2.2. Compiling the program with Cmake and Make
 
-### 2.2. Design Decisions
+Again, I am assuming this to be done on a Darwin Mac Computer. I expect it to be slightly modified on a Windows computer. Linux/Ubuntu should be the same.
 
-The program is built with three files:
+1) Go to an appropriate directory in build. I usually build in `build/Debug`. If the directory isn't there, you can make a new named folder. 
+2) If there are already CMake files in there, delete the cache to make a new one if that is necessary, or jump to step X.
+3) From your path, `build/Debug`, `build/Release` or `build/Test`; run `cmake ../..`
+- Basically, we're calling to the `CMakeLists.txt` file in the root directory, which contains build instructions. 
+4) Once the build is done, and there are CMake files in your current directory, there would also be a `Makefile` file created.
+5) Run `make` from that path, and the executables `rpn_calculator` and `test_calculator` will be created in the same directory
+6) Run `./rpn_calculator` or `./test_calculator` to run the executables
 
-1) rpn_calculator.h
+I should have already built them on push to the repositary (under `build/Release` in circumstances).
+Either run the Commands from Step 6 there, or run `build/Release/rpn_calculator` or test with `build/Release/test_calculator`.
+### 2.3. Design Decisions
+
+The program is built with five files in src:
+
+1) main.cpp
 2) rpn_calculator.cpp
-3) main.cpp
+3) rpn_calculator.h
+4) isOperator.h
+5) helpSheet.h
 
-in 1 and 2, we add a RPNStackCalculator Class to take on the repetitive operations
-into 3 method calls. A Stack Container is called in privately by the class whenever
+in 2 and 3, we add a RPNStackCalculator Class to take on the repetitive operations
+into three method calls. A Stack Container is called in privately by the class whenever
 we declare an instance.
 
-in 3, we call a function externally to check whether something is an operator.
+in 4, we call a function externally to check whether something is an operator.
 
 We parse our input string and call on the methods to run the Calculator.
 
 Basic CLI Functionality is added in an infintie while loop with a bool switch.
 
 The program is kept bare bones on purpose, as anything other than this would be 
-needless overengineering. The task is simple to begin with. I've nevertheless packed
-everything into its own unit files to allow, for example, future work on this to be 
-easy and modular. As such, it can be expanded endlessly, for example, adding more 
-methods in the rpn_calculator header and cpp file, or adding in more operations in the rpn_cal*.cpp
-and main.cpp file, etc.
+needless overengineering. 
+
+The task is simple to begin with. I've nevertheless packed
+everything into its own unit files to allow future work on this to be 
+easy and modular. As such, it can be expanded endlessly by, for example, adding more 
+methods in the rpn_calculator header and .cpp file, or adding in more operations in the rpn_calculator.cpp
+and isOperator.h file, etc.
 
 Optimally I would make this file with Cmake to allow for better distribution, which I will
-still try to add in. As, one thing to note is, I've written the Readme in context
-of a Mac Darwin Development Environment. As there are some glitched with lldb and GDB Debuggers,
-I've instead opted out of it for the sake of simplicity.
+still try to add in. I opted to do this manually, which is possible but difficult, as VSCode isn't being cooperative(There are some glitched with lldb and GDB Debuggers and config files).
+
+I've written the Readme in context of a Mac Darwin Development Environment.
 
 I added in the Readme and variables in English, as that is the language of the internet far and wide.
 
 It could also be prudent to add German Documentation for the steps shown here.
+
+
 
 
 
