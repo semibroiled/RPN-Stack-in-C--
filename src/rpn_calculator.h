@@ -25,7 +25,6 @@
 
 class RPNStackCalculator
 {
-
 public:
     RPNStackCalculator();
     void pushOperand(double operand);
