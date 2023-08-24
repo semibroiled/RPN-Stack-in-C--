@@ -1,0 +1,6 @@
+.vscode
+*.o
+main.o
+rpn_calculator.o
+build/Debug/
+build/Test/
