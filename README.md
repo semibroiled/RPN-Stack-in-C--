@@ -100,6 +100,39 @@ At any time,
 Here's an excerpt from the help files on running the program.
 
 ```
+Welcome to the RPN Stack Calculator Project!
+
+This is an example implementation of a Calculator with Postfix Notation,
+also known as RPN implemented with a Stack in C++
+
+Enter a valid expression. Current Mode: RPN
+Type exit or e to to quit. Type help or h to get additonal instructions.
+>>h
+
+Some Instructions to help you along the tool
+
+Type in Mathematical Expressions using:
+-> '+' for Addition,
+-> '-' for Subtraction,
+-> '/' for Division,
+-> '*' for Multplication,
+-> '^' for Exponent
+
+The program runs either in RPN or Inline Mode
+Type in Inline to switch to Inline mode,
+or type in RPN to switch to RPN mode at any time
+
+Expressions have to be in RPN or Postfix Notation when in RPN Mode;
+You would write an inline expression 5+3 in RPN Notation as 5 3 +
+
+Expressions have to be in Inline Notation when in Inline Mode;
+You would write an inline expression >> 5 + 3
+Inline expressions are converted into RPN before evaluation
+Note that the expression tokens have to be separated by a space
+
+Enter a valid expression. Current Mode: RPN
+Type exit or e to to quit. Type help or h to get additonal instructions.
+>>
 
 ```
 
@@ -217,8 +250,221 @@ There is an extensive use of guard clauses to rule out edge cases and validate i
 
 All in all, I think this project demonstrated good practice in code writing, linting, formatting, project management, unit testing, modular expansion, proper use of functional and OOP approaches. I consider this a success. 
 
-## Dokumentaion auf Deutsch 
+## Dokumentation auf Deutsch 
 
+## Einführung
+
+Die RPN (Reverse Polish Notation) oder Postfix-Notation ist eine Form der Notation, bei der mathematische Ausdrücke beginnend mit den Operanden oder Zahlen des Ausdrucks geschrieben werden und mit ihren Operatoren enden.
+
+Zum Beispiel würden wir `2+2`, was in der Inline-Notation ist, als `2 2 +` in der Postfix-Notation schreiben.
+
+Bei komplexeren Ausdrücken verwenden wir keine Klammern, um die Reihenfolge der Operationen anzugeben, wie es bei der normalen Inline-Notation der Fall ist. Um Postfix-Ausdrücke zu berechnen, folgen wir einem spezifischen Algorithmus unter Verwendung eines Stapels.
+
+Inline-Ausdrücke werden mithilfe des Shunting Yard-Algorithmus in RPN umgewandelt.
+
+## 1. Berechnung von RPN-Ausdrücken
+### 1.1. Stapel (Stacks)
+
+Ein Stapel ist eine Art geordneter Sammlung, bei der Werte in einer stapelähnlichen Reihenfolge abgelegt werden, dh nach dem Prinzip "FILO" (First In, Last Out). Stellen Sie sich einen Stapel Bücher auf einem Schreibtisch vor. Das erste Buch unten wäre das letzte, das Sie erreichen würden, während Sie jedes Buch von oben nach unten inspizieren.
+
+Stapel haben in verschiedenen Programmiersprachen gemeinsame Operationen.
+
+Sie können den obersten Wert eines Stapels entfernen (auch als "pop" bezeichnet). In einigen Sprachen würde "pop" auch den Wert für Sie auslesen. Im Kontext von C++ handelt es sich um zwei verschiedene Operationen.
+
+Sie können Werte nacheinander auf den Stapel legen (auch als "push" bezeichnet).
+
+In C++ können Sie einen Stack-Datentyp aus der Standardbibliothek verwenden.
+
+### 1.2. RPN im Stapel
+
+Nehmen Sie den Fall eines RPN-Ausdrucks: 1 2 3 + -
+
+Um diesen Ausdruck zu berechnen, lesen Sie von links nach rechts.
+
+Stellen Sie sich vor, Sie haben einen leeren Stapel, in den Sie die Werte legen können. Beim Lesen von links nach rechts, wenn Sie einen ganzzahligen oder numerischen Wert sehen, legen Sie die Zahlen auf den Stapel. Wenn Sie also von unten nach oben lesen (denken Sie daran, dass die Werte auf der untersten Ebene zuletzt abgerufen werden), sieht Ihr Stapel so aus:
+
+
+```
+|------|---|
+|top   | 3 |   
+|......| 2 |  
+|bottom| 1 | 
+------------
+```
+
+
+An diesem Punkt gelangen wir zu den Operatoren. Wenn wir auf den ersten Operator stoßen, der das + Zeichen ist, entfernen wir die obersten beiden Operanden - die Zahlen, auf denen die Operation ausgeführt werden soll - aus dem Stapel. Wir nehmen zuerst 3 und dann 2 heraus und führen anschließend die Operation 3+2 aus. Das Ergebnis ist 5, und wir legen es wieder auf den Stapel. Dies wiederholen wir mit dem - Operator. Wir nehmen die beiden obersten Werte im Stapel heraus, nämlich 5 und 1. 1-5 ergibt -4. Dies ist unser Endergebnis.
+
+Am Ende der Postfix-Notation gibt es keine weiteren Operatoren mehr, und wir haben einen Wert, das Ergebnis, das im Stapel verbleibt.
+
+## 2. Verwendung des Programms
+
+### 2.1. Kompilieren und Ausführen des Programms in der Terminal mit GCC
+
+#### 2.1.1. Kompilieren des RPN-Rechners in der Befehlszeile zum Verzeichnis build/bin/
+
+Der Code ist in 5 Dateien unterteilt. Das Skript, das den Rechner ausführt, befindet sich in der Datei main.cpp. Mit einem C++-Compiler wie GCC oder Clang können Sie die einzelnen Dateien *.cpp im Pfad `./src/` im Terminal kompilieren. In diesem Beispiel gehe ich davon aus, dass Sie auf einem Mac-Computer bereits einen GCC-Compiler im PATH verwenden.
+
+Schritt für Schritt erklärt:
+1) Navigieren Sie im Terminal zum Pfad mit den Dateien im Stammverzeichnis `RPN Stack in C++`.
+2) Kompilieren Sie die Dateien in Objektdateien.
+2a) Führen Sie `g++ -c src/rpn_calculator.cpp` aus, vorausgesetzt, Sie befinden sich im Stammverzeichnis `.`.
+2b) Führen Sie `g++ --std=c++17 -c src/main.cpp` aus.
+
+Hinweis: Verwenden Sie im Allgemeinen `-std=c++17`, wenn bei der Kompilierung Fehler aufgrund von Versionsinkompatibilitäten auftreten.
+
+Dadurch werden eine `main.o`- und eine `rpn_calculator.o`-Datei im Stammverzeichnis erstellt.
+
+3) Verknüpfen Sie die beiden Dateien zu einer ausführbaren Datei im Verzeichnis `build/bin/` mit dem Befehl `g++ -o build/bin/calc main.o rpn_calculator.o`.
+
+Dadurch wird eine ausführbare Binärdatei mit dem Namen "calc" im angegebenen Pfad erstellt. Dieser Name kann beliebig sein.
+
+4) Führen Sie die ausführbare Datei mit `build/bin/calc` aus und folgen Sie den Anweisungen im Programm.
+
+Zu jeder Zeit:
+- Geben Sie `exit` ein, um das Programm über die Befehlszeile zu beenden.
+- Geben Sie `help` ein, um weitere Anweisungen zur Bedienung des Programms zu erhalten.
+- Geben Sie `in` ein, um in den Inline-Ausdrucksmodus zu wechseln.
+- Geben Sie `post` oder `rpn` ein, um in den RPN-Ausdrucksmodus zu wechseln.
+
+Hier ist ein Auszug aus den Hilfedateien zur Ausführung des Programms:
+
+```
+Welcome to the RPN Stack Calculator Project!
+
+This is an example implementation of a Calculator with Postfix Notation,
+also known as RPN implemented with a Stack in C++
+
+Enter a valid expression. Current Mode: RPN
+Type exit or e to to quit. Type help or h to get additonal instructions.
+>>h
+
+Some Instructions to help you along the tool
+
+Type in Mathematical Expressions using:
+-> '+' for Addition,
+-> '-' for Subtraction,
+-> '/' for Division,
+-> '*' for Multplication,
+-> '^' for Exponent
+
+The program runs either in RPN or Inline Mode
+Type in Inline to switch to Inline mode,
+or type in RPN to switch to RPN mode at any time
+
+Expressions have to be in RPN or Postfix Notation when in RPN Mode;
+You would write an inline expression 5+3 in RPN Notation as 5 3 +
+
+Expressions have to be in Inline Notation when in Inline Mode;
+You would write an inline expression >> 5 + 3
+Inline expressions are converted into RPN before evaluation
+Note that the expression tokens have to be separated by a space
+
+Enter a valid expression. Current Mode: RPN
+Type exit or e to to quit. Type help or h to get additonal instructions.
+>>
+
+```
+
+Akzeptable Antworten sind durch Leerzeichen getrennte Werte in Postfix-Notation.
+
+_Beispiele sind:_
+- 5 4 +,
+- 5 9 1 + *,
+- ...
+
+Die Inline-Notation erlaubt Einträge mit Leerzeichen und die Verwendung von `(` und `)` als Klammern.
+
+Normalerweise hätte ich die `calc`-Binärdatei bereits kompiliert. Die Schritte 1 bis 4 sind bereits für Sie erledigt. Sie müssen nur den 4. Schritt ausführen, um zur ausführbaren Datei zu gelangen.
+
+#### 2.1.2. Kompilieren und Ausführen von Tests
+
+Das `src`-Verzeichnis enthält auch eine Testdatei, mit der Sie die Effektivität des Programms in der `RPNStackCalculator`-Klasse validieren können. Hier erfahren Sie, wie Sie sie selbst kompilieren und ausführen können, um das Programm zu testen.
+
+In der Datei `src/test_rpn_calculator.cpp` fügen Sie Ihre eigenen Ausdrücke und Werte ein, um sie in den Arrays `expressions` und `expectResults` zu testen, die in Zeile 9 bzw. 19 definiert sind. Standardmäßig können Sie auch mit den Werten arbeiten, die dort angegeben sind.
+
+Die Schritte sind ähnlich wie beim Kompilieren und Verknüpfen der Datei `main.cpp`.
+
+Schritt für Schritt erklärt:
+1) Navigieren Sie im Terminal zum Pfad mit den Dateien im Stammverzeichnis `RPN Stack in C++`.
+2) Kompilieren Sie die Dateien in Objektdateien.
+2a) Führen Sie `g++ -c src/rpn_calculator.cpp` aus, vorausgesetzt, Sie befinden sich im Stammverzeichnis `.`. Dies könnte bereits in Schritt 2.1.1 erledigt worden sein.
+2b) Führen Sie `g++ -std=c++17 -c src/test_rpn_calculator.cpp` aus. Diese Änderung mit `-std` ist wichtig, da zumindest auf meinem Computer `std::size` in Zeile 21 andernfalls nicht kompiliert werden würde.
+
+Dadurch werden eine `test_rpn_calculator.o`- und eine `rpn_calculator.o`-Datei im Stammverzeichnis erstellt.
+
+3) Verknüpfen Sie die beiden Dateien zu einer ausführbaren Datei im Verzeichnis `build/bin/` mit dem Befehl `g++ -o build/bin/test_calc test_rpn_calculator.o rpn_calculator.o`.
+
+Dadurch wird eine ausführbare Binärdatei mit dem Namen "test_calc" im angegebenen Pfad erstellt. Dieser Name kann beliebig sein.
+
+4) Führen Sie die ausführbare Datei mit `build/bin/test_calc` aus, und die Ergebnisse der Überprüfungen werden in der Befehlszeile angezeigt. Im Falle von Fehlern sehen Sie, wenn etwas schief geht.
+
+Normalerweise hätte ich die `test_calc`-Binärdatei bereits kompiliert. Die Schritte 1 bis 4 sind bereits für Sie erledigt. Sie müssen nur den 4. Schritt ausführen, um zur ausführbaren Datei zu gelangen.
+
+Was die Implementierung der Inline-Funktionalität im aktuellen Branch betrifft, müssen die Testfälle noch auf ein anderes Format aktualisiert werden, um Randfälle zu testen. Die meisten Tests wurden außerhalb des Repositorys in einer Prototyping-Datei durchgeführt.
+
+### 2.2. Kompilieren des Programms mit CMake und Make
+
+Nochmals, ich gehe davon aus, dass dies auf einem Mac-Darwin-Entwicklungsumfeld durchgeführt wird. Ich erwarte, dass es auf einem Windows-Computer leicht modifiziert wird. Für Linux/Ubuntu sollte es gleich sein.
+
+1) Gehen Sie zu einem geeigneten Verzeichnis im Verzeichnis "build". Normalerweise erstelle ich in `build/Debug`, `build/Release` oder `build/Test`. Wenn das Verzeichnis dort nicht existiert, können Sie einen neuen Ordner mit dem gewünschten Namen erstellen.
+2) Wenn bereits CMake-Dateien vorhanden sind, löschen Sie den Cache, um bei Bedarf neue Dateien zu erstellen, oder fahren Sie mit Schritt X fort.
+3) Von Ihrem Pfad `build/Debug`, `build/Release` oder `build/Test` aus führen Sie `cmake ../..` aus.
+- Im Wesentlichen rufen wir die Datei "CMakeLists.txt" im Stammverzeichnis auf, die Build-Anweisungen enthält.
+4) Sobald der Build abgeschlossen ist und CMake-Dateien in Ihrem aktuellen Verzeichnis vorhanden sind, wird auch eine Datei "Makefile" erstellt.
+5) Führen Sie `make` von diesem Pfad aus aus, und die ausführbaren Dateien "rpn_calculator" und "test_calculator" werden im selben Verzeichnis erstellt.
+6) Führen Sie `./rpn_calculator` oder `./test_calculator` aus, um die ausführbaren Dateien auszuführen.
+
+Normalerweise hätte ich die Binärdateien bereits im Verzeichnis "build/Release" erstellt. Führen Sie entweder die Befehle aus Schritt 6 dort aus oder führen Sie `build/Release/rpn_calculator` aus oder testen Sie mit `build/Release/test_calculator`.
+
+### 2.3. Designentscheidungen
+
+Das Programm besteht aus fünf Dateien im Verzeichnis "src":
+
+1) main.cpp
+2) rpn_calculator.cpp
+3) rpn_calculator.h
+4) func_operator.h
+5) helpSheet.h
+6) infixToPostfix.h
+7) validateInput.h
+8) test_rpn_calculator.cpp
+
+- In 2 und 3 fügen wir eine Klasse RPNStackCalculator hinzu, um die wiederholten Operationen in drei Methodenaufrufe zu übernehmen. Ein Stapelcontainer wird von der Klasse privat verwendet, wann immer wir eine Instanz deklarieren.
+
+- In 4 definieren wir extern ein Array von Funktionen, um zu überprüfen, ob etwas ein Operator oder eine Klammer ist, und weisen auch die Wichtigkeit von Operatoren zu.
+
+- In 5 fügen wir die Ausgabe im Terminal hinzu, um Benutzern bei der Verwendung im Terminal zu helfen.
+
+- In 6 fügen wir die Funktionalität hinzu, von der Infix-Notation in Postfix umzuwandeln.
+
+- In 7 definieren wir eine Funktion, die unzulässige Zeichen im Ausdruck mit einem hohen Maß an Modularität überprüft.
+
+- In 1 wird das gesamte Programm als CLI-Endpunkt bereitgestellt.
+
+- In 8 definieren wir einige einfache Assertions-Tests, um Randfälle und Fehler zu überprüfen.
+
+##### Einige abschließende Bemerkungen
+
+Wir analysieren unseren Eingabezeichenfolge und rufen die Methoden auf, um den Rechner auszuführen.
+
+Die grundlegende CLI-Funktionalität ist in einer unendlichen Schleife mit einem boolschen Schalter enthalten.
+
+Das Programm ist absichtlich minimalistisch gehalten, da alles andere überflüssige Überkonstruktionen wären. Es ist bereits ziemlich umfangreich und groß.
+
+Die Aufgabe ist zu Beginn einfach. Dennoch habe ich alles in separate modulare Dateien verpackt, um zukünftige Arbeiten daran einfach und fehlerfrei zu gestalten. So kann es endlos erweitert werden, indem beispielsweise weitere Methoden in der Header-Datei rpn_calculator und .cpp-Datei hinzugefügt werden oder mehr Operationen in der rpn_calculator.cpp- und func_operator.h-Datei hinzugefügt werden usw.
+
+Optimalerweise würde ich diese Datei mit CMake erstellen, um eine bessere Verteilung zu ermöglichen, was ich immer noch versuchen werde hinzuzufügen. Ich habe mich dafür entschieden, dies manuell zu tun, was möglich, aber schwierig ist, da VSCode nicht kooperiert (es gibt einige Probleme mit lldb- und GDB-Debuggern und Konfigurationsdateien).
+
+Ich habe die Readme im Kontext einer Mac Darwin-Entwicklungsumgebung geschrieben.
+
+Fügen Sie an jeder Stelle die Befehle "help", "quit" hinzu, um dem Benutzer in der Befehlszeile mehr Nutzen aus diesem Programm zu bieten.
+
+Benutzer können auch zwischen Inline- und RPN-Notation wechseln. Der Ausdruck wird in Postfix ausgewertet. Jegliche Infix-Notation wird bei der Ausführung im Inline-Modus in Postfix umgewandelt.
+
+Es gibt eine umfangreiche Verwendung von Guard-Klauseln, um Randfälle auszuschließen und Eingaben zu validieren, zum Beispiel.
+
+Insgesamt denke ich, dass dieses Projekt eine gute Praxis im Schreiben von Code, Linting, Formatierung, Projektmanagement, Unittesting, modularer Erweiterung, ordnungsgemäßer Verwendung funktionaler und OOP-Ansätze demonstriert. Ich finde es ist gelungen.
 
 
 
