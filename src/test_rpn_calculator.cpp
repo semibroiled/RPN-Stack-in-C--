@@ -9,7 +9,7 @@
 #include "rpn_calculator.h"
 // ? This isn't getting imported properly from its own directory-
 // ! temporary fix is putting in /src
-#include "isOperator.h"
+#include "func_operator.h"
 #include <iostream>
 #include <cassert>
 #include <sstream>
