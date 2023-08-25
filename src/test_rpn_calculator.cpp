@@ -5,6 +5,9 @@
  * Assert that your values and test expressions align
  *
  * TODO: Add test cases for inline to rpn conversion
+ * * Added test cases to protoype. Try to add in edge cases and
+ * * Different forms here
+ * TODO: Add decimal operations, add inline tests, add operation in between
  */
 #include "rpn_calculator.h"
 // ? This isn't getting imported properly from its own directory-

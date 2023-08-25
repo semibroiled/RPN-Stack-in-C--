@@ -1417,9 +1417,11 @@ CMakeFiles/test_calculator.dir/src/test_rpn_calculator.cpp.o: /Users/acm/Project
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h \
-  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/isOperator.h \
+  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/func_operator.h \
   /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/rpn_calculator.h
 
+
+/Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/func_operator.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/xlocale/_string.h:
 
@@ -1550,8 +1552,6 @@ CMakeFiles/test_calculator.dir/src/test_rpn_calculator.cpp.o: /Users/acm/Project
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_clock_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/machine/endian.h:
-
-/Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/isOperator.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/machine/_mcontext.h:
 

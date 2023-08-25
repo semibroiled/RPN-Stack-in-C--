@@ -736,9 +736,11 @@ CMakeFiles/rpn_calculator.dir/src/main.cpp.o: /Users/acm/Projects/RPN\ Stack\ Ca
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h \
+  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/func_operator.h \
   /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/helpSheet.h \
-  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/isOperator.h \
-  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/rpn_calculator.h
+  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/infixToPostfix.h \
+  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/rpn_calculator.h \
+  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/validateInput.h
 
 CMakeFiles/rpn_calculator.dir/src/rpn_calculator.cpp.o: /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/rpn_calculator.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/Availability.h \
@@ -1422,6 +1424,8 @@ CMakeFiles/rpn_calculator.dir/src/rpn_calculator.cpp.o: /Users/acm/Projects/RPN\
   /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/rpn_calculator.h
 
 
+/Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/func_operator.h:
+
 /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h:
@@ -1522,8 +1526,6 @@ CMakeFiles/rpn_calculator.dir/src/rpn_calculator.cpp.o: /Users/acm/Projects/RPN\
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/machine/limits.h:
 
-/Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/isOperator.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/machine/_mcontext.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/libkern/_OSByteOrder.h:
@@ -1563,6 +1565,8 @@ CMakeFiles/rpn_calculator.dir/src/rpn_calculator.cpp.o: /Users/acm/Projects/RPN\
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/optional:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/new:
+
+/Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/validateInput.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/math.h:
 
@@ -1817,6 +1821,8 @@ CMakeFiles/rpn_calculator.dir/src/rpn_calculator.cpp.o: /Users/acm/Projects/RPN\
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__type_traits/is_empty.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__ranges/view_interface.h:
+
+/Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/infixToPostfix.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__ranges/enable_view.h:
 
