@@ -8,7 +8,7 @@
 			"args": [
 				"-g",
 				"-std=c++20",
-				"${workspaceFolder}/main.cpp",
+				"${workspaceFolder}/src/prototype.cpp",
 				"-o",
 				"${fileDirname}/run"
 			],

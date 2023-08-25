@@ -735,5 +735,7 @@ CMakeFiles/rpn_calculator.dir/src/main.cpp.o: \
   /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/rpn_calculator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/deque \
-  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/isOperator.h \
-  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/helpSheet.h
+  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/func_operator.h \
+  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/helpSheet.h \
+  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/infixToPostfix.h \
+  /Users/acm/Projects/RPN\ Stack\ Calculator/RPN\ Stack\ in\ C++/src/validateInput.h

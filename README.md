@@ -1,5 +1,8 @@
 # RPN-Stack-in-C++
 
+## Index
+
+## Documentatoin in English
 ## Introduction
 
 RPN (Reverse Polish Notation) or Postfix Notation, is a form of notation
@@ -12,6 +15,8 @@ Postfix Notation.
 For more complex expressions, we don't use parentheses to denote order of operations
 as in with normal inline notation. To compute postfix expressions, we follow along
 a specific algorithms using a stack.
+
+Inline Expressions are converted into RPN using the Stunting Yard Algorithm.
 
 ## 1. Computing RPN Expressions
 ### 1.1. Stacks
@@ -40,9 +45,15 @@ Imagine you have an empty stack, where you can put in the values. Reading from
 left to write, if you see an integral or numerical value, you put the numbers in 
 the stack. So, from the bottom up (remember, the values at the bottom level is
 accessed last), you stack would read;
--top: 3
-- 2
--bottom: 1
+
+```
+|------|---|
+|top   | 3 |   
+|......| 2 |  
+|bottom| 1 | 
+------------
+```
+
 
 At which point, we come to the operators. When we come across the first operator,
 which is the + sign, we expel the top two operands- the numbers to be operated on,
@@ -68,7 +79,9 @@ Explained step by step,
 1) Go to the path with the files in terminal in root directory `RPN Stack in C++`
 2) Compile files into object files
 2a)) Run `g++ -c src/rpn_caculator.cpp`, assuming you're in the root `.` directory
-2b)) Run `g++ -c src/main.cpp`
+2b)) Run `g++ --std=c++17 c src/main.cpp`
+
+Note: In general, best use -std=c++17 if any versioning errors pop up in build
 
 This generates a `main.o` and `rpn_calculator.o` file in your root directory
 
@@ -79,27 +92,26 @@ This makes a binary executable named calc in the specified path. This name can b
 4) Run the executable with `build/bin/calc` and follow through the instructions in program
 
 At any time, 
-- type exit to quit the program from the terminal, 
-- help for further instructions on how to operate the program. 
+- type in `exit` to quit the program from the terminal, 
+- type in `help` for further instructions on how to operate the program. 
+- type in `in` to change mode to Inline Expression Mode
+- type in `post` or `rpn` to change mode to RPN Expression Mode
 
 Here's an excerpt from the help files on running the program.
 
 ```
-Enter a valid postfix expression. Type exit to to quit. Type help to get additonal instructions
->>help
-Type in Mathematical Expressions with...
-+ for Addition, - for Subtraction, / for Division, * for Multplication and ^ for Exponent
-Expressions have to be in RPN or Postfix Notation, ie...
-You would write an inline expression 5+3 in RPN Notation as 5 3 +
-Note that the expression tokens have to be separated by a space
+
 ```
 
-Acceptable responses are space separated and of postfix notation. 
+Acceptable responses are space separated in postfix notation. 
 
 _Examples are:_ 
 - 5 4 +, 
 - 5 9 1 + *,
 - ...
+
+Inline notation allows space separated entries with usage of only '(' adn ')'
+as brackets. 
 
 Normally, I would have already compiled the calc binary exectuable. So, 
 steps 1 through 4 are done for you. And you would only need to do the 4th step
@@ -132,6 +144,10 @@ Normally, I would have already compiled the test_calc binary exectuable. So,
 steps 1 through 4 are done for you. And you would only need to do the 4th step
 to hop into the executable.
 
+As of implementing the Inline Functionality in current branch, the test cases 
+are yet to be updated different format to test for edge cases. Most tests 
+were done off repo in a prototyping file.
+
 ### 2.2. Compiling the program with Cmake and Make
 
 Again, I am assuming this to be done on a Darwin Mac Computer. I expect it to be slightly modified on a Windows computer. Linux/Ubuntu should be the same.
@@ -153,38 +169,55 @@ The program is built with five files in src:
 1) main.cpp
 2) rpn_calculator.cpp
 3) rpn_calculator.h
-4) isOperator.h
+4) func_operator.h
 5) helpSheet.h
+6) infixToPostfix.h
+7) validateInput.h
+8) test_rpn_calculator.cpp
 
-in 2 and 3, we add a RPNStackCalculator Class to take on the repetitive operations
-into three method calls. A Stack Container is called in privately by the class whenever
-we declare an instance.
+- in 2 and 3, we add a RPNStackCalculator Class to take on the repetitive operations into three method calls.A Stack Container is called in privately by the class whenever we declare an instance.
 
-in 4, we call a function externally to check whether something is an operator.
+- in 4, we define an array of functions externally to check whether something is an operator, paranthesis, and also assign operator importance.
+
+- in 5, we add in terminal output to help users in the terminal upon usage
+
+- in 6, we add in the functionality of changing notations from infix
+
+- in 7, we define a function that checks for illegal characters in the expression with a high degree of modularity
+
+- in 1, the whole porgram is expose as an endpoint CLI 
+
+- in 8, we define some simple assertions tests to inspect edge cases and bugs
+
+##### Some Closing Remarks
 
 We parse our input string and call on the methods to run the Calculator.
 
 Basic CLI Functionality is added in an infintie while loop with a bool switch.
 
 The program is kept bare bones on purpose, as anything other than this would be 
-needless overengineering. 
+needless overengineering. This has become quite the extensive and large build as is. 
 
 The task is simple to begin with. I've nevertheless packed
-everything into its own unit files to allow future work on this to be 
-easy and modular. As such, it can be expanded endlessly by, for example, adding more 
+everything into its own modular files to allow future work on this to be 
+easy and error averse. As such, it can be expanded endlessly by, for example, adding more 
 methods in the rpn_calculator header and .cpp file, or adding in more operations in the rpn_calculator.cpp
-and isOperator.h file, etc.
+and func_operator.h file, etc.
 
 Optimally I would make this file with Cmake to allow for better distribution, which I will
 still try to add in. I opted to do this manually, which is possible but difficult, as VSCode isn't being cooperative(There are some glitched with lldb and GDB Debuggers and config files).
 
 I've written the Readme in context of a Mac Darwin Development Environment.
 
-I added in the Readme and variables in English, as that is the language of the internet far and wide.
+Add any point, the commands help, quit helps the user get more bang for the buck out of this program.
 
-It could also be prudent to add German Documentation for the steps shown here.
+Users can also change between Inline and RPN Notation. The expressions is evaluated in Postfix. Any Infix is converted to Postfix, when run on Inline mode. 
 
+There is an extensive use of guard clauses to rule out edge cases and validate inputs, for example.
 
+All in all, I think this project demonstrated good practice in code writing, linting, formatting, project management, unit testing, modular expansion, proper use of functional and OOP approaches. I consider this a success. 
+
+## Dokumentaion auf Deutsch 
 
 
 
